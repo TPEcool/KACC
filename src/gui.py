@@ -8,6 +8,7 @@ from tkinter.messagebox import askyesno
 from ttkbootstrap import *
 import json
 import os
+from assetcreator import AssetCreator
 
 win = Window('KACC (GUI version)', 'darkly')
 
@@ -72,9 +73,12 @@ isJson = lambda f: os.path.splitext(f)[1] == '.json'
 progressbar = Progressbar(win, length = 200, style=(STRIPED, INFO))
 progressbar.pack(side=BOTTOM, expand=True, fill=X, anchor=S, padx=5, pady=5)
 
+assetcreator_isrunning = BooleanVar(win, False)
+
 def add():
-    #TODO: implement add
-    raise NotImplementedError('TODO: implement add()')
+    if not assetcreator_isrunning.get():
+        assetc = AssetCreator(assetcreator_isrunning)
+    else: assetc.show()
     
 def search(paklist: list[str]):
     '''
